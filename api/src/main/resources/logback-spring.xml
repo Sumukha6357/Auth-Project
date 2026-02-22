@@ -1,0 +1,11 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>{"ts":"%date{ISO8601}","level":"%level","thread":"%thread","logger":"%logger{36}","corr":"%X{correlationId}","msg":"%replace(%msg){'(?i)(password|secret|token)=[^&amp;\\s]+','$1=***'}"}%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

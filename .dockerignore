@@ -1,0 +1,11 @@
+.git
+**/.git
+**/node_modules
+**/.next
+**/target
+**/dist
+**/coverage
+**/.idea
+**/.vscode
+web/node_modules_old/
+web/node_modules_broken/

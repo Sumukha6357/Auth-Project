@@ -1,0 +1,26 @@
+name: Promote
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.target }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm promotion target
+        run: echo "Promoting release to ${{ inputs.target }}"
+      - name: Placeholder deploy step
+        run: |
+          echo "Integrate this job with your deployment runner (ArgoCD, Helm, ECS, etc.)"
+          echo "This gate enforces environment promotion flow: dev -> staging -> production"

@@ -1,0 +1,19 @@
+services:
+  api:
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      IDP_HTTPS_ONLY: "false"
+
+  web:
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+    ports:
+      - "${WEB_PORT}:3000"
+
+  postgres:
+    restart: unless-stopped
+
+  redis:
+    restart: unless-stopped

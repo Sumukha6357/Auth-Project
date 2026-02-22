@@ -1,0 +1,63 @@
+server:
+  port: 9000
+  forward-headers-strategy: framework
+
+spring:
+  datasource:
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/idp}
+    username: ${POSTGRES_USER:idp}
+    password: ${POSTGRES_PASSWORD:idp}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    baseline-on-migrate: false
+    validate-on-migrate: true
+    locations: classpath:db/migration
+  security:
+    oauth2:
+      authorizationserver:
+        issuer: ${IDP_ISSUER:http://localhost:9000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
+
+idp:
+  key:
+    encryption-secret: ${IDP_KEY_ENCRYPTION_SECRET}
+    rotation-days: 30
+  lockout:
+    max-failures: 5
+    lock-minutes: 15
+  bootstrap:
+    admin-email: ${IDP_ADMIN_BOOTSTRAP_EMAIL}
+    admin-password: ${IDP_ADMIN_BOOTSTRAP_PASSWORD}
+  cors:
+    enabled: false
+    allowed-origins: []
+  security:
+    https-only: ${IDP_HTTPS_ONLY:true}
+    required-audience: ${IDP_REQUIRED_AUDIENCE:idp-admin-api}
+    fail-fast-secrets: ${IDP_FAIL_FAST_SECRETS:true}
+  rate-limit:
+    token-endpoint-per-minute: ${IDP_RATE_LIMIT_TOKEN_PER_MINUTE:300}
+    login-endpoint-per-minute: ${IDP_RATE_LIMIT_LOGIN_PER_MINUTE:120}
+    introspect-endpoint-per-minute: ${IDP_RATE_LIMIT_INTROSPECT_PER_MINUTE:120}
+
+logging:
+  level:
+    root: INFO

@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 198 36% 97%;
+  --foreground: 214 48% 14%;
+  --card: 0 0% 100%;
+  --card-foreground: 214 48% 14%;
+  --muted: 200 20% 94%;
+  --muted-foreground: 215 20% 35%;
+  --accent: 188 68% 45%;
+  --accent-foreground: 0 0% 100%;
+  --primary: 215 84% 32%;
+  --primary-foreground: 0 0% 100%;
+  --border: 208 25% 88%;
+  --ring: 188 68% 45%;
+  --success: 150 64% 34%;
+  --warning: 36 90% 45%;
+  --danger: 0 72% 45%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background font-sans text-foreground antialiased;
+  background-image: radial-gradient(circle at 5% 5%, rgba(72, 202, 228, 0.18), transparent 30%),
+    radial-gradient(circle at 95% 20%, rgba(37, 99, 235, 0.1), transparent 35%);
+}
+
+.card-grid {
+  @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3;
+}

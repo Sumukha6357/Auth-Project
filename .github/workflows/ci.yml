@@ -53,6 +53,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build API image
-        run: docker build -t idp-api:ci ./api
+        run: docker build -f api/Dockerfile -t idp-api:ci .
       - name: Build web image
-        run: docker build -t web:ci ./web
+        run: docker build -f web/Dockerfile -t web:ci .
